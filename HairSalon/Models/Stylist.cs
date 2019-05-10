@@ -16,6 +16,7 @@ namespace HairSalon.Models
       LastName = lastName;
       Id = id;
     }
+
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
@@ -64,6 +65,21 @@ namespace HairSalon.Models
       }
       return allStylists;
     }
+
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylist;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
 
   }
 }
