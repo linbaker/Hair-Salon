@@ -153,34 +153,40 @@ namespace HairSalon.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE clients SET first_name = @newFirstName WHERE id = @searchId;";
+      var cmdFirstName = conn.CreateCommand() as MySqlCommand;
+      cmdFirstName.CommandText = @"UPDATE clients SET first_name = @newFirstName WHERE id = @searchId;";
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@searchId";
       searchId.Value = Id;
+      cmdFirstName.Parameters.Add(searchId);
 
+      FirstName = newFirstName;
       MySqlParameter firstName = new MySqlParameter();
       firstName.ParameterName = "@newFirstName";
       firstName.Value = newFirstName;
+      cmdFirstName.Parameters.Add(firstName);
 
-      cmd.CommandText = @"UPDATE clients SET last_name = @newLastName WHERE id = @searchId;";
+      LastName = newLastName;
+      var cmdLastName = conn.CreateCommand() as MySqlCommand;
+      cmdLastName.CommandText = @"UPDATE clients SET last_name = @newLastName WHERE id = @searchId;";
+      cmdLastName.Parameters.Add(searchId);
       MySqlParameter lastName = new MySqlParameter();
       lastName.ParameterName = "@newLastName";
       lastName.Value = newLastName;
+      cmdLastName.Parameters.Add(lastName);
 
-      cmd.CommandText = @"UPDATE clients SET client_since = @newClientSince WHERE id = @searchId;";
+      ClientSince = newClientSince;
+      var cmdClientSince = conn.CreateCommand() as MySqlCommand;
+      cmdClientSince.CommandText = @"UPDATE clients SET client_since = @newClientSince WHERE id = @searchId;";
+      cmdClientSince.Parameters.Add(searchId);
       MySqlParameter clientSince = new MySqlParameter();
       clientSince.ParameterName = "@newClientSince";
       clientSince.Value = newClientSince;
+      cmdClientSince.Parameters.Add(clientSince);
 
-      cmd.Parameters.Add(searchId);
-      cmd.Parameters.Add(firstName);
-      cmd.Parameters.Add(lastName);
-      cmd.Parameters.Add(clientSince);
-      cmd.ExecuteNonQuery();
-      FirstName = newFirstName;
-      LastName = newLastName;
-      ClientSince = newClientSince;
+      cmdFirstName.ExecuteNonQuery();
+      cmdLastName.ExecuteNonQuery();
+      cmdClientSince.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
       {
