@@ -81,14 +81,11 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Find_ReturnsStylistInDatabase_Stylist()
     {
-      //Arrange
       Stylist testStylist = new Stylist("Jane", "Doe");
       testStylist.Save();
 
-      //Act
       Stylist foundStylist = Stylist.Find(testStylist.Id);
 
-      //Assert
       Assert.AreEqual(testStylist, foundStylist);
     }
 
