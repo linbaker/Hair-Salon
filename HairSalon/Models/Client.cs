@@ -143,5 +143,63 @@ namespace HairSalon.Models
       }
       return newClient;
     }
+
+    public void Edit(string newFirstName, string newLastName, DateTime newClientSince)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE clients SET first_name = @newFirstName WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = Id;
+      cmd.Parameters.Add(searchId);
+
+      MySqlParameter firstName = new MySqlParameter();
+      firstName.ParameterName = "@newFirstName";
+      firstName.Value = newFirstName;
+
+      cmd.CommandText = @"UPDATE clients SET last_name = @newLastName WHERE id = @searchId;";
+      MySqlParameter lastName = new MySqlParameter();
+      lastName.ParameterName = "@newLastName";
+      lastName.Value = newLastName;
+
+      cmd.CommandText = @"UPDATE clients SET client_since = @newClientSince WHERE id = @searchId;";
+      MySqlParameter clientSince = new MySqlParameter();
+      clientSince.ParameterName = "@newClientSince";
+      clientSince.Value = newClientSince;
+
+      cmd.Parameters.Add(firstName);
+      cmd.Parameters.Add(lastName);
+      cmd.Parameters.Add(clientSince);
+      cmd.ExecuteNonQuery();
+      FirstName = newFirstName;
+      LastName = newLastName;
+      ClientSince = newClientSince;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public void DeleteClient()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM clients WHERE id = @thisId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@thisId";
+      thisId.Value = Id;
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
   }
 }

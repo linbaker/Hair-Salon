@@ -70,5 +70,48 @@ namespace HairSalon.Tests
       Assert.AreEqual(firstClient, secondClient);
     }
 
+    [TestMethod]
+    public void Save_SavesToDatabase_ClientList()
+    {
+      Client testClient = new Client("first name1", "last name1", new DateTime(2019,05,02), 1);
+
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+      List<Client> testList = new List<Client>{testClient};
+
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Edit_UpdatesClientInDatabase_String()
+    {
+      Client testClient = new Client("first name1", "last name1", new DateTime(2019,05,02), 1);
+      testClient.Save();
+      string newFirstName = "Generic";
+      string newLastName = "Name";
+      DateTime newClientSince = new DateTime(2019,05,06);
+
+      testClient.Edit(newFirstName, newLastName, newClientSince);
+      string result = Client.Find(testClient.Id).FirstName;
+
+      Assert.AreEqual(newFirstName, result);
+    }
+
+    [TestMethod]
+    public void DeleteClient_UpdatesClientInDatabase_String()
+    {
+      Client testClient = new Client("first name1", "last name1", new DateTime(2019,05,02), 1);
+      Client testClient2 = new Client("first name2", "last name2", new DateTime(2019,05,02), 1);
+      testClient.Save();
+      testClient2.Save();
+
+      testClient.DeleteClient( );
+
+      int testId = testClient2.Id;
+
+      Assert.AreEqual(testId, Client.GetAll()[0].Id);
+    }
+
+
   }
 }
