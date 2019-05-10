@@ -174,7 +174,7 @@ namespace HairSalon.Models
       }
     }
 
-    public void DeleteCuisine()
+    public void DeleteStylist()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
