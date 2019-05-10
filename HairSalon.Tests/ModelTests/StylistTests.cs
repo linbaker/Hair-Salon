@@ -108,9 +108,9 @@ namespace HairSalon.Tests
     {
       Stylist testStylist = new Stylist("Jane", "Doe");
       testStylist.Save();
-      Client firstClient = new Client("Jane", "Doe", testStylist.Id);
+      Client firstClient = new Client("Jane", "Doe", new DateTime(2019,01,01), testStylist.Id);
       firstClient.Save();
-      Client secondClient = new Client("Jane", "Doe", testStylist.Id);
+      Client secondClient = new Client("John", "Doe", new DateTime(2019,12,12), testStylist.Id);
       secondClient.Save();
       List<Client> testHairSalon = new List<Client> {firstClient, secondClient};
       List<Client> resultHairSalon = testStylist.GetClients();
