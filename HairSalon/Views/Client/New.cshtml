@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>New Client</title>
+</head>
+<body>
+  <h1>Add a new Client for @Model.FirstName</h1>
+
+  <form action='/stylist/@Model.Id/client' method='post'>
+
+    <label for="clientName">First Name</label>
+    <input id="clientFirstName" name="clientFirstName" type="text">
+    <br>
+    <label for="clientName">Last Name</label>
+    <input id="clientLastName" name="clientLastName" type="text">
+    <br>
+    <label for="clientName">Client Since</label>
+    <input id="clientSince" name="clientSince" type="text">
+    <br>
+
+    <button type='submit'>Add Client</button>
+  </form>
+
+</body>
+</html>

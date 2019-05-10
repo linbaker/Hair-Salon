@@ -1,0 +1,15 @@
+@using HairSalon.Models;
+
+<h1>Client Details: </h1>
+
+<h2>@Model["client"].FirstName @Model["client"].LastName</h2>
+<h3>Client Since: @Model["client"].ClientSince</h3>
+<h3>Stylist: @Model["stylists"].FirstName</h3>
+
+<form action="/stylist/@Model["stylists"].Id/clients/@Model["client"].Id/delete" method="post">
+  <button type="submit" name="button">Remove This Client</button>
+</form>
+
+<a href='/stylist/@Model["stylists"].Id/clients/@Model["client"].Id/edit'>Edit this Client</a>
+<a href='/stylist/@Model["stylists"].Id/clients/new'>Add another client</a>
+<a href='/stylist'>View all stylist</a>
