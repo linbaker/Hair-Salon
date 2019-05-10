@@ -39,6 +39,11 @@ namespace HairSalon.Models
       }
     }
 
+    public override int GetHashCode()
+    {
+      return this.Id.GetHashCode();
+    }
+
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
@@ -153,7 +158,6 @@ namespace HairSalon.Models
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@searchId";
       searchId.Value = Id;
-      cmd.Parameters.Add(searchId);
 
       MySqlParameter firstName = new MySqlParameter();
       firstName.ParameterName = "@newFirstName";
@@ -169,6 +173,7 @@ namespace HairSalon.Models
       clientSince.ParameterName = "@newClientSince";
       clientSince.Value = newClientSince;
 
+      cmd.Parameters.Add(searchId);
       cmd.Parameters.Add(firstName);
       cmd.Parameters.Add(lastName);
       cmd.Parameters.Add(clientSince);
