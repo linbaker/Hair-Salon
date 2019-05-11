@@ -8,6 +8,12 @@ namespace HairSalon.Controllers
 {
   public class ClientController : Controller
   {
+    [HttpGet("/stylist/{stylistId}/client/new")]
+    public ActionResult New(int stylistId)
+    {
+      Stylist stylist = Stylist.Find(stylistId);
+      return View(stylist);
+    }
 
     [HttpGet("/stylist/{stylistId}/client/{clientId}")]
     public ActionResult Show(int stylistId, int clientId)
@@ -21,13 +27,6 @@ namespace HairSalon.Controllers
     }
 
 
-    [HttpPost("/client/delete")]
-    public ActionResult DeleteAll()
-    {
-      Client.ClearAll();
-      return View();
-    }
-
     [HttpPost("/stylist/{stylistId}/client/{clientId}/delete")]
     public ActionResult Delete(int stylistId, int clientId)
     {
@@ -37,7 +36,7 @@ namespace HairSalon.Controllers
       Stylist stylist = Stylist.Find(stylistId);
       model.Add("stylist", stylist);
       model.Add("client", client);
-      return RedirectToAction("Show", "Stylists");
+      return Redirect("/");
     }
 
     [HttpGet("/stylist/{stylistId}/client/{clientId}/edit")]

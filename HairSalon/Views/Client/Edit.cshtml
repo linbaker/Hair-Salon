@@ -1,16 +1,16 @@
 <h1>Client List</h1>
 <hr>
 
-<h2>Edit Client: @Model["clients"].FirstName</h2>
+<h2>Edit Client: @Model["client"].FirstName</h2>
 
-<form action="/stylist/@Model["clients"].Id/restaurants/@Model["clients"].Id" method="post">
+<form action="/stylist/@Model["client"].Id/client/@Model["client"].Id" method="post">
   <label for="newClient">First Name:</label>
-  <input type="text" name="newFirstName" value="@Model["clients"].FirstName">
+  <input type="text" name="newFirstName" value="@Model["client"].FirstName">
   <label for="newClient">Last Name:</label>
-  <input type="text" name="newLastName" value="@Model["clients"].LastName">
+  <input type="text" name="newLastName" value="@Model["client"].LastName">
   <label for="newClient">Client Since Date:</label>
-  <input type="text" name="newClientSince" value="@Model["clients"].LastName">
+  <input type="text" name="newClientSince" value="@Model["client"].LastName">
   <button type="submit">Edit</button>
 </form>
 
-<h4><a href="/stylist/@Model["clients"].Id/clientss/@Model["clients"].Id">Return to previous page</a></h4>
+<h4><a href="/stylist/@Model["client"].Id/client/@Model["client"].Id">Return to previous page</a></h4>

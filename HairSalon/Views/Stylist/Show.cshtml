@@ -1,13 +1,20 @@
+@using System;
+@using System.Linq;
 @using HairSalon.Models;
 
 <h3>Here are all the clients for @Model.FirstName :</h3>
 
 <ol>
 
-@foreach (Client client in @Model.GetClients())
-{
-  <li><a href='/stylist/@Model.Id/client/@client.Id'>@client.FirstName @client.LastName</a></li>
-}
+  @if (@Model.GetClients().Count == 0)
+  {
+    <h3>No clients have been added yet!</h3>
+  }
+
+  @foreach (Client client in @Model.GetClients())
+  {
+    <li><a href='/stylist/@Model.Id/client/@client.Id'>@client.FirstName @client.LastName</a></li>
+  }
 </ol>
 
 <form action="/stylist/@Model.Id/delete" method="post">
