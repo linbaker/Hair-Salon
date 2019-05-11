@@ -13,13 +13,14 @@ _This application will allow a user to input stylist information, client informa
 
 |Behavior|Input|Output|
 |-|-|-|
-|Input single word to compare to single word not matching, count remains zero |"hello", "goodbye"| 0 |
-|Input single word to compare to single word identical matching, counts increases to 1 |"hello", "hello"| 1 |
-|Input single word to compare to single word identical matching regardless of case, counts increases to 1 |"hello", "HeLlO"| 1 |
-|Input single word to compare to multiple words, count increases for every match |"hello", "HeLlO world I said hello"| 2 |
-|Input single word to compare to multiple words with period at the end of sentence, count increases for every match |"hello", "HeLlO world I said hello hello."| 3 |
-|Input single word to compare to multiple words with punctuation, count increases for every match |"cat", "Cat, the cat, thought 'I am the best cat!'""| 3 |
-|Input single word to compare to multiple words with punctuation, count increases for every match |"good-bye", "I said 'Good-bye' waving good-bye"| 2 |
+|User is able to add and save stylist first and last name in database, and will be assigned a unique id |"Edward Scissorhands"| in table stylists: id = 0, first_name = "Edward", last_name = "Scissorhands"|
+|User can view all stylists saved to database|"Edward Scissorhands", "Sweeney Todd"| "Edward Scissorhands", "Sweeney Todd" |
+|User is able to navigate to specific stylist and add clients to specific to that stylist, including first and last name and date they first visited|navigate to "Sweeney Todd", add client "Mrs.", "Lovett", 2019/05/09| "Mrs. Lovett", Client Since: 2019/05/09, Stylist "Sweeney"|
+|User is able to click on a stylist's name to see all clients for that stylist |navigate to "Sweeney Todd"|"Sweeney's Clients: Adolfo Pirelli, Mrs. Lovett"|
+|User is able to navigate to specific client to see further information|"Mrs."| "Mrs. Lovett", Client Since: 2019/05/09, Stylist "Sweeney" |
+|User is able to edit client information|"Adolfo Pirelli", Client Since: 2019/05/10, Stylist "Sweeney"|"RIP deceased", Client Since: 2019/05/09, Stylist "Sweeney"|
+|User is able to delete clients|"RIP deceased", Client Since: 2019/05/09, Stylist "Sweeney"| - |
+|User is able to delete stylists, which will delete all clients assigned to that stylist|"Sweeney Todd", Client "Mrs. Lovett"| - |
 
 
 ## Setup/Installation Requirements
@@ -30,7 +31,8 @@ _This application will allow a user to input stylist information, client informa
 > CREATE DATABASE lindsey_baker;
 > USE lindsey_baker;
 > CREATE TABLE stylists (id serial PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255));
-> CREATE TABLE clients (id serial PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), client_since DATETIME, stylist_id INT);_
+> CREATE TABLE clients (id serial PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), client_since DATETIME, stylist_id INT);
+Alternately, if you wish to download the existing database for this project, in phpMyAdmin, select the import tab and import the database lindsey_baker from the cloned repository file_
 * _Compile in C# .Net Core 2.2_
 * _Run program and view on localhost:5000_
 
