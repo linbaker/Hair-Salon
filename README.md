@@ -27,12 +27,12 @@ _This application will allow a user to input stylist information, client informa
 
 * _Clone Repository_
 * _To create your own Database, launch MAMP application and select 'Start Sever'_
-* _Using MySql in terminal, create database using the following commands:
+* _Using MySql in terminal, create database using the following commands:_
 > CREATE DATABASE lindsey_baker;
 > USE lindsey_baker;
 > CREATE TABLE stylists (id serial PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255));
 > CREATE TABLE clients (id serial PRIMARY KEY, first_name VARCHAR(255), last_name VARCHAR(255), client_since DATETIME, stylist_id INT);
-Alternately, if you wish to download the existing database for this project, in phpMyAdmin, select the import tab and import the database lindsey_baker from the cloned repository file_
+Alternately, if you wish to download the existing database for this project, in phpMyAdmin, select the import tab and import the database lindsey_baker from the cloned repository file
 * _Compile in C# .Net Core 2.2_
 * _Run program and view on localhost:5000_
 
