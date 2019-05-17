@@ -34,5 +34,20 @@ namespace HairSalon.Tests
       Specialty newSpecialty = new Specialty("test specialty");
       Assert.AreEqual(typeof(Specialty), newSpecialty.GetType());
     }
+
+
+    [TestMethod]
+    public void GetAll_ReturnsAllSpecialtyObjects_SpecialtyList()
+    {
+      string name01 = "Colorist";
+      string name02 = "Extenstions";
+      Specialty newSpecialtyOne = new Specialty(name01);
+      newSpecialtyOne.Save();
+      Specialty newSpecialtyTwo = new Specialty(name02);
+      newSpecialtyTwo.Save();
+      List<Specialty> newList = new List<Specialty> { newSpecialtyOne, newSpecialtyTwo };
+      List<Specialty> result = Specialty.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
   }
 }
