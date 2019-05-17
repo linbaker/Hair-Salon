@@ -2,13 +2,13 @@
 
 https://github.com/linbaker/Hair-Salon
 
-#### _C# Database Exercise for Epicodus, 05.10.2019_
+#### _C# Database Exercise for Epicodus, 05.17.2019_
 
 #### By _**Lindsey Baker**_
 
 ## Description
 
-_This application will allow a user to input stylist information, client information and see which clients belong to which stylist. User will be able to add, delete and edit both client and stylist information._
+_This application will allow a user to input stylist information, client information and see which clients belong to which stylist. User will be able to add, delete and edit both client and stylist information. User will be able to add specialties to stylists, many stylists may have the same specialty_
 
 
 |Behavior|Input|Output|
