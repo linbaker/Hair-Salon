@@ -6,13 +6,13 @@ using System;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class SpecialtyTest //: IDisposable
+  public class SpecialtyTest : IDisposable
   {
-    //
-    // public void Dispose()
-    // {
-    //   Client.ClearAll();
-    // }
+
+    public void Dispose()
+    {
+      Client.ClearAll();
+    }
 
     public SpecialtyTest()
     {
@@ -26,6 +26,13 @@ namespace HairSalon.Tests
       Specialty secondSpecialty = new Specialty("colorist");
 
       Assert.AreEqual(firstSpecialty, secondSpecialty);
+    }
+
+    [TestMethod]
+    public void SpecialtyConstructor_CreatesInstanceOfSpecialty_Specialty()
+    {
+      Specialty newSpecialty = new Specialty("test specialty");
+      Assert.AreEqual(typeof(Specialty), newSpecialty.GetType());
     }
   }
 }
