@@ -107,5 +107,17 @@ namespace HairSalon.Tests
 
       CollectionAssert.AreEqual(testList, result);
     }
+
+    [TestMethod]
+    public void Find_ReturnsSpecialtyInDatabase_Specialty()
+    {
+      Specialty testSpecialty = new Specialty("Mohawks");
+      testSpecialty.Save();
+
+      Specialty foundSpecialty = Specialty.Find(testSpecialty.Id);
+
+      Assert.AreEqual(testSpecialty, foundSpecialty);
+    }
+
   }
 }
