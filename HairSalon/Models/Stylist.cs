@@ -244,5 +244,34 @@ namespace HairSalon.Models
       return specialties;
     }
 
+    public void Edit(string newFirstName, string newLastName)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmdFirstName = conn.CreateCommand() as MySqlCommand;
+      cmdFirstName.CommandText = @"UPDATE stylists SET first_name = @newFirstName WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = Id;
+      cmdFirstName.Parameters.Add(searchId);
+
+      FirstName = newFirstName;
+      cmdFirstName.Parameters.AddWithValue("@newFirstName", newFirstName);
+
+      LastName = newLastName;
+      var cmdLastName = conn.CreateCommand() as MySqlCommand;
+      cmdLastName.CommandText = @"UPDATE stylists SET last_name = @newLastName WHERE id = @searchId;";
+      cmdLastName.Parameters.Add(searchId);
+      cmdLastName.Parameters.AddWithValue("@newLastName", newLastName);
+
+      cmdFirstName.ExecuteNonQuery();
+      cmdLastName.ExecuteNonQuery();
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
   }
 }
