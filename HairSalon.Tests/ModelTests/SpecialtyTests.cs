@@ -87,8 +87,6 @@ namespace HairSalon.Tests
 
       List<Stylist> result = testSpecialty.GetStylists();
       List<Stylist> testList = new List<Stylist>{testStylist};
-      Console.WriteLine(result);
-      Console.WriteLine(testList);
 
       CollectionAssert.AreEqual(testList, result);
     }
@@ -106,8 +104,6 @@ namespace HairSalon.Tests
       testSpecialty.AddStylist(testStylist);
       List<Stylist> result = testSpecialty.GetStylists();
       List<Stylist> testList = new List<Stylist> {testStylist};
-      Console.WriteLine(testList);
-      Console.WriteLine(result);
 
       CollectionAssert.AreEqual(testList, result);
     }
