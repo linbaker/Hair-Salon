@@ -2,12 +2,14 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: May 11, 2019 at 02:53 AM
--- Server version: 5.7.25
--- PHP Version: 7.3.1
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 20, 2019 at 03:54 AM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,13 +30,28 @@ USE `lindsey_baker`;
 -- Table structure for table `clients`
 --
 
-CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE IF NOT EXISTS `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `client_since` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `stylist_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `stylist_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialties`
+--
+
+DROP TABLE IF EXISTS `specialties`;
+CREATE TABLE IF NOT EXISTS `specialties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -42,43 +59,28 @@ CREATE TABLE `clients` (
 -- Table structure for table `stylists`
 --
 
-CREATE TABLE `stylists` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `stylists`;
+CREATE TABLE IF NOT EXISTS `stylists` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `last_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Table structure for table `stylists_specialties`
 --
 
---
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `stylists`
---
-ALTER TABLE `stylists`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `stylists`
---
-ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+DROP TABLE IF EXISTS `stylists_specialties`;
+CREATE TABLE IF NOT EXISTS `stylists_specialties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `specialty_id` int(11) NOT NULL,
+  `stylist_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
