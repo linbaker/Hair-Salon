@@ -1,0 +1,14 @@
+@using HairSalon.Models;
+
+<h1>Specialties</h1>
+<hr>
+
+<h2>Edit Specialties: @Model.Type</h2>
+
+<form action="/specialty/@Model.Id" method="post">
+  <label for="newType">Type:</label>
+  <input type="text" name="newType" value="@Model.Type">
+  <button type="submit">Edit</button>
+</form>
+
+<h4><a href="/specialty">Return to previous page</a></h4>
