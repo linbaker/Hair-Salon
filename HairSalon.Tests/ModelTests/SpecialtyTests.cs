@@ -136,5 +136,17 @@ namespace HairSalon.Tests
       CollectionAssert.AreEqual(testStylistSpecialties, resultStylistSpecialties);
     }
 
+    [TestMethod]
+    public void Edit_UpdatesSpecialtyInDatabase_String()
+    {
+      Specialty testSpecialty = new Specialty("Blah");
+      testSpecialty.Save();
+      string secondType = "Blerg";
+
+      testSpecialty.Edit(secondType);
+      string result = Specialty.Find(testSpecialty.Id).Type;
+
+      Assert.AreEqual(secondType, result);
+    }
   }
 }
