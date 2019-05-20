@@ -98,15 +98,15 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists_specialties (stylist_id, specialty_id) VALUES (@StylistId, @SpeacialtyId);";
-      MySqlParameter stylistId = new MySqlParameter();
-      stylistId.ParameterName = "@StylistId";
-      stylistId.Value = newStylist.Id;
-      cmd.Parameters.Add(stylistId);
-      MySqlParameter specialtyId = new MySqlParameter();
-      specialtyId.ParameterName = "@SpeacialtyId";
-      specialtyId.Value = Id;
-      cmd.Parameters.Add(specialtyId);
+      cmd.CommandText = @"INSERT INTO stylists_specialties (specialty_id, stylist_id) VALUES (@SpecialtyId, @StylistId);";
+      MySqlParameter specialty_id = new MySqlParameter();
+      specialty_id.ParameterName = "@SpecialtyId";
+      specialty_id.Value = Id;
+      cmd.Parameters.Add(specialty_id);
+      MySqlParameter stylist_id = new MySqlParameter();
+      stylist_id.ParameterName = "@StylistId";
+      stylist_id.Value = newStylist.Id;
+      cmd.Parameters.Add(stylist_id);
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -145,6 +145,30 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return stylists;
+    }
+
+    public static Specialty Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM specialties WHERE id = (@searchId);";
+      cmd.Parameters.AddWithValue("@searchId", id);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int SpecialtyId = 0;
+      string SpecialtyType = "";
+      while(rdr.Read())
+      {
+        SpecialtyId = rdr.GetInt32(0);
+        SpecialtyType = rdr.GetString(1);
+      }
+      Specialty newSpecialty = new Specialty(SpecialtyType, SpecialtyId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newSpecialty;
     }
 
   }
