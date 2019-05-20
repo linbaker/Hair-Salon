@@ -17,10 +17,25 @@
   }
 </ol>
 
+<h3>Here are all the specialties for @Model.FirstName :</h3>
+<ol>
+
+  @if (@Model.GetSpecialties().Count == 0)
+  {
+    <h3>No specialties have been added yet!</h3>
+  }
+
+  @foreach (Specialty specialty in @Model.GetSpecialties())
+  {
+    <li> @specialty.Id'>@specialty.Type </li>
+  }
+</ol>
+
 <form action="/stylist/@Model.Id/delete" method="post">
   <button type="submit" name="button">Remove This Stylist</button>
 </form>
 
 <p><a href='/stylist/@Model.Id/client/new'>Add a new client</a></p>
+<p><a href='/stylist/@Model.Id/specialty/new'>Add a new specialty</a></p>
 <p><a href='/stylist'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
