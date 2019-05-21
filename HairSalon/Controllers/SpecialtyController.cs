@@ -7,20 +7,20 @@ namespace HairSalon.Controllers
 {
   public class SpecialtyController : Controller
   {
-    [HttpGet("/specialty")]
+    [HttpGet("/stylist/{stylistId}/specialty")]
     public ActionResult Index()
     {
       List<Specialty> allSpecialty = Specialty.GetAll();
       return View(allSpecialty);
     }
 
-    [HttpGet("/specialty/new")]
+    [HttpGet("/stylist/{stylistId}/specialty/new")]
     public ActionResult New()
     {
       return View();
     }
 
-    [HttpPost("/specialty")]
+    [HttpPost("/stylist/{stylistId}")]
     public ActionResult Create(string specialtyType)
     {
       Specialty newSpecialty = new Specialty(specialtyType);
